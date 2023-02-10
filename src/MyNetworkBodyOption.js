@@ -17,7 +17,7 @@ function MyNetworkBodyOption({ profilePic, name, description, college }) {
             <div className="myNetworkBodyOption__footer">
                 <div className="myNetworkBodyOption__footer__section">
                     <PersonAddAltIcon />
-                    {/* <h3>Connect</h3> */}
+                    <h3>Connect</h3>
                 </div>
             </div>
         </div>
