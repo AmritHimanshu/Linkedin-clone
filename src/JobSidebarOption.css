@@ -1,0 +1,15 @@
+.jobSidebarOption {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin: 25px 0;
+}
+
+.jobSidebarOption:hover {
+  cursor: pointer;
+}
+
+.jobSidebarOption > .MuiSvgIcon-root {
+  margin-right: 10px;
+  color: rgb(115, 114, 114);
+}

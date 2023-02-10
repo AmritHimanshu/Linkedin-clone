@@ -1,0 +1,73 @@
+.myNetworkBodyStart {
+  flex: 0.5;
+  min-width: 460.5px;
+  border-radius: 10px;
+  margin: 0 20px;
+}
+
+.myNetworkBodyInvitation {
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 0 1px 1px lightgray;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.myNetworkBodyInvitation__pending {
+  font-size: large;
+}
+
+.myNetworkBodyInvitation__manage {
+  color: rgb(101, 100, 100);
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.myNetworkBodyInvitation__manage:hover {
+  background-color: rgb(228, 225, 225);
+  cursor: pointer;
+}
+
+.myNetworkBody {
+  border-radius: 10px;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 0 1px 1px lightgray;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.myNetworkBody__header {
+  margin: 10px 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.people {
+  font-size: large;
+}
+
+.seeAll {
+  color: rgb(101, 100, 100);
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.seeAll:hover {
+  background-color: rgb(228, 225, 225);
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1383px) {
+  .myNetworkBodyStart {
+    flex: 0.9;
+  }
+}

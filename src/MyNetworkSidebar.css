@@ -1,0 +1,33 @@
+.myNetworkSidebar {
+  min-width: 276.3px;
+  position: sticky;
+  top: 100px;
+  flex: 0.3;
+  max-height: 60vh;
+  margin-left: 50px;
+  border-radius: 10px;
+  height: fit-content;
+  background-color: white;
+  box-shadow: 0px 0px 1px 0px rgb(171, 171, 171);
+}
+
+.myNetworkSidebar__header {
+  padding: 10px;
+  font-size: 20px;
+}
+
+.myNetworkSidebar__showless {
+  display: flex;
+  margin-left: 5px;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: fit-content;
+  color: rgb(99, 99, 99);
+  border-radius: 5px;
+}
+
+.myNetworkSidebar__showless:hover {
+  cursor: pointer;
+  background-color: rgb(230, 230, 230);
+}

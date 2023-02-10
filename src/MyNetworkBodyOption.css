@@ -1,0 +1,65 @@
+.myNetworkBodyOption {
+  width: 178.5px;
+  height: 282px;
+  border-radius: 10px;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 0 1px 1px lightgray;
+  margin: 10px 10px;
+}
+
+.myNetworkBodyOption:hover {
+  box-shadow: 0 2px 1px 1px rgb(166, 166, 166);
+}
+
+.myNetworkBodyOption__image > img {
+  width: 100%;
+  height: 70px;
+  margin-bottom: -50px;
+}
+
+.myNetworkBodyOption__body {
+  margin-top: 10px;
+  height: 60px;
+}
+
+.myNetworkBodyOption__body > p {
+  font-size: 13px;
+  color: rgb(110, 110, 110);
+}
+
+.myNetworkBodyOption__body:hover {
+  cursor: pointer;
+}
+
+.myNetworkBodyOption__body:hover > h3 {
+  text-decoration: underline;
+}
+
+.myNetworkBodyOption__footer {
+  color: #036194;
+  border-radius: 20px;
+  width: 80%;
+  margin-left: 18px;
+  border: 2px solid #0280c3;
+  position: relative;
+  bottom: -40px;
+}
+
+.myNetworkBodyOption__footer :hover {
+  cursor: pointer;
+  color: #005888;
+  background-color: #b7e7ff;
+}
+
+.myNetworkBodyOption__footer__section {
+  display: flex;
+  justify-content: center;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.myNetworkBodyOption__footer__section > h3 {
+  font-weight: bolder;
+  padding-left: 10px;
+}

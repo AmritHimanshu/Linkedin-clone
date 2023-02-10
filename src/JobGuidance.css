@@ -1,0 +1,73 @@
+.jobGuidance {
+  position: sticky;
+  top: 100px;
+  width: 100%;
+  flex: 0.3;
+  max-height: 38vh;
+  margin-right: 20px;
+  border-radius: 10px;
+  height: fit-content;
+  background-color: white;
+  box-shadow: 0px 0px 1px 0px rgb(171, 171, 171);
+}
+
+.jobGuidance__header {
+  padding: 10px 10px;
+}
+
+.jobGuidance__header > h4 {
+  font-size: 20px;
+}
+
+.jobGuidance__header > p {
+  font-size: 13px;
+  margin-top: 5px;
+  color: rgb(108, 108, 108);
+}
+
+.jobGuidance__middle {
+  padding: 20px 10px;
+  background-color: #f7fbfd;
+}
+
+.jobGuidance__middle:hover {
+  cursor: pointer;
+  background-color: #e0f4ff;
+}
+
+.jobGuidance__footer {
+  padding: 10px;
+}
+
+.jobGuidance__footer > span {
+  display: flex;
+  margin: 10px;
+  align-items: center;
+  color: #004c75;
+  font-weight: bold;
+}
+
+.jobGuidance__footer > span > p {
+  text-decoration: underline;
+  padding-right: 5px;
+}
+
+.jobGuidance__footer > span:hover {
+  cursor: pointer;
+}
+
+.jobGuidance__footer > span > .MuiSvgIcon-root {
+  font-size: larger;
+}
+
+@media screen and (max-width: 1027px) {
+  .jobGuidance {
+    /* visibility: hidden; */
+    position: absolute;
+    bottom: 0;
+    top: auto;
+    width: 450px;
+    margin-left: 235px;
+    margin-top: 20px;
+  }
+}
