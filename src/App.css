@@ -10,3 +10,17 @@
 .app::-webkit-scrollbar {
   display: none;
 }
+
+.spinner {
+  text-align: center;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 88vh;
+}
+
+.spinner > img {
+  width: 200px;
+}

@@ -5,6 +5,8 @@ import Widgets from './Widgets'
 import './Home.css'
 
 function Home() {
+
+
     return (
         <div className='home'>
             <Sidebar />

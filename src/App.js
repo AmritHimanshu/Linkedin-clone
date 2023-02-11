@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+import { auth } from './firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout, selectUser } from './features/userSlice';
-import { auth } from './firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { ColorRing } from 'react-loader-spinner';
 import Header from './Header';
 import Login from './Login';
 import Home from './Home';
@@ -36,6 +38,29 @@ function App() {
       }
     })
   }, []);
+
+
+  // Loading Spinner
+  const [users, loading] = useAuthState(auth);
+  if (loading) {
+    return (
+      <div className="spinner">
+
+        <img src="https://news.hitb.org/sites/default/files/styles/large/public/field/image/500px-LinkedIn_Logo.svg__1.png?itok=q_lR0Vks" alt="" />
+
+        <ColorRing
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="blocks-loading"
+          wrapperStyle={{}}
+          wrapperClass="blocks-wrapper"
+          colors={['#0074b1', '#0074b1', '#0074b1', '#0074b1', '#0074b1']}
+        />
+
+      </div>
+    )
+  }
 
 
   return (

@@ -21,6 +21,7 @@
 
 .post__body {
   overflow-wrap: anywhere;
+  font-size: 1rem;
 }
 
 .post__info > h2 {
