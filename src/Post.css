@@ -25,7 +25,11 @@
 
 .post__body {
   overflow-wrap: anywhere;
-  font-size: 14px;
+}
+
+.post__body > h4 {
+  font-size: 13px;
+  font-weight: 500 !important;
 }
 
 .post__buttons {

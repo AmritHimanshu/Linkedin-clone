@@ -29,7 +29,7 @@ const Post = forwardRef(({ data }, ref) => {
                 </div>
             </div>
             <div className="post__body">
-                <p>{data.message}</p>
+                <h4>{data.message}</h4>
             </div>
 
             <div className="post__buttons">
