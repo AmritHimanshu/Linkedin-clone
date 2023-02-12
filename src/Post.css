@@ -27,14 +27,11 @@
   overflow-wrap: anywhere;
 }
 
-.post__body > p {
-  font-size: 1rem;
-}
-
 @media screen and (max-width: 760px) {
-  .post__body > h4 {
+  .post__body > p {
     /* font-size: ;
     font-weight: 500 !important; */
+    font-size: calc(0.5vw + 0.7rem);
   }
 }
 
