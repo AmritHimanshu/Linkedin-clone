@@ -27,9 +27,15 @@
   overflow-wrap: anywhere;
 }
 
-.post__body > h4 {
-  font-size: 13px;
-  font-weight: 500 !important;
+.post__body > p {
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 760px) {
+  .post__body > h4 {
+    /* font-size: ;
+    font-weight: 500 !important; */
+  }
 }
 
 .post__buttons {
