@@ -24,7 +24,7 @@
 
 @media screen and (max-width: 700px) {
   .mobileWarning {
-    /* visibility: visible; */
+    visibility: visible;
     /* flex-direction: column; */
   }
   .mobileWarning > span {
