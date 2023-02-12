@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { auth } from './firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout, selectUser } from './features/userSlice';
+import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { ColorRing } from 'react-loader-spinner';
 import Header from './Header';
@@ -79,7 +79,6 @@ function App() {
     <Router>
       <div className="app">
         <MobileWarning />
-        {/* {showMobileWarning ? (<MobileWarning />) } */}
         {!user ? (<Login />) :
           (
             <div className="app__body">

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import firebase from 'firebase/compat/app';
 import { auth, db } from './firebase';
@@ -10,9 +11,19 @@ function Login() {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [profilePic, setProfilePic] = useState('');
-    const [picFile, setPicFile] = useState([]);
+    const [picFile, setPicFile] = useState();
 
+    const history = useNavigate();
     const dispatch = useDispatch();
+
+    const handleChange = (e) => {
+        // console.log(e.target.files);
+        setPicFile(URL.createObjectURL(e.target.files[0]));
+    }
+
+    useEffect(() => {
+        history('/');
+    }, [])
 
 
     const loginToApp = (e) => {
@@ -24,6 +35,7 @@ function Login() {
                     uid: userAuth.user.uid,
                     displayName: userAuth.user.displayName,
                     profileUrl: userAuth.user.photoURL,
+                    // photo: userAuth.user.photo,
                 })
                 );
             }).catch(error => alert(error));
@@ -44,6 +56,7 @@ function Login() {
                 userAuth.user.updateProfile({
                     displayName: name,
                     photoURL: profilePic,
+                    // photo: picFile,
                 }).then(() => {
                     dispatch(
                         login({
@@ -51,6 +64,7 @@ function Login() {
                             uid: userAuth.user.uid,
                             displayName: name,
                             photoURL: profilePic,
+                            // photo: picFile,
                         })
                     );
                 });
@@ -60,6 +74,7 @@ function Login() {
             email: email,
             displayName: name,
             photoURL: profilePic,
+            // photo: picFile,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
     };
@@ -74,7 +89,9 @@ function Login() {
 
                 <input value={profilePic} onChange={e => setProfilePic(e.target.value)} placeholder='Profile pic URL (optional) or select file' type="text" />
 
-                {/* <input type="file" value={picFile} onChange={e => setPicFile(e.target.value)} /> */}
+                {/* <input value={picFile} onChange={e => setProfilePic(e.target.value)} placeholder='Profile pic URL (optional) or select file' type="text" /> */}
+
+                {/* <input type="file" onChange={handleChange} /> */}
 
                 <input value={email} onChange={e => setEmail(e.target.value)} placeholder='Email' type="email" />
 
