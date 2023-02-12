@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { auth } from './firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout, selectUser } from './features/userSlice';
@@ -9,19 +9,31 @@ import Login from './Login';
 import Home from './Home';
 import MyNetwork from './MyNetwork';
 import Jobs from './Jobs';
+import MobileWarning from './MobileWarning';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './App.css';
 
 function App() {
 
-  const user = useSelector(selectUser);
-
   const dispatch = useDispatch();
+
+  // Warning for mobile phone
+  const [showMobileWarning, setShowMobileWarning] = useState(false)
+
+  useEffect(() => {
+    if (window.innerWidth <= 800)
+      setShowMobileWarning(true)
+    // console.log(showMobileWarning);
+    else setShowMobileWarning(false)
+  }, [])
+
+
+  // User
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     auth.onAuthStateChanged(userAuth => {
       if (userAuth) {
-        // console.log(userAuth);
         // user is logged in
         dispatch(
           login({
@@ -66,7 +78,8 @@ function App() {
   return (
     <Router>
       <div className="app">
-
+        <MobileWarning />
+        {/* {showMobileWarning ? (<MobileWarning />) } */}
         {!user ? (<Login />) :
           (
             <div className="app__body">
@@ -79,6 +92,7 @@ function App() {
             </div>
           )
         }
+
 
       </div>
     </Router>
