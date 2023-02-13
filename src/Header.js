@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { logout } from './features/userSlice';
-import { auth } from './firebase';
+import { auth, storage } from './firebase';
+import { getAuth, updateProfile } from "firebase/auth";
+import { getDownloadURL, listAll, ref } from 'firebase/storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, selectUser } from './features/userSlice';
+import { setPic } from './features/profilePhoto';
 import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
@@ -16,6 +19,25 @@ function Header() {
 
     const history = useNavigate();
     const dispatch = useDispatch();
+
+    const user = useSelector(selectUser);
+
+    const [imageList, setImageList] = useState('');
+
+    const imageListRef = ref(storage, `${user.email}/`);
+
+    useEffect(() => {
+        listAll(imageListRef).then((res) => {
+            res.items.forEach((item) => {
+                getDownloadURL(item).then((url) => {
+                    setImageList(url);
+                })
+            })
+        });
+    }, []);
+
+    dispatch(setPic({profileUrl: imageList}));
+
 
     const jobs = () => {
         history('/jobs');
@@ -44,9 +66,8 @@ function Header() {
                 <HeaderOption Icon={BusinessCenterIcon} titles='Jobs' onClick={jobs} />
                 <HeaderOption Icon={ChatIcon} titles='Messaging' />
                 <HeaderOption Icon={NotificationsIcon} titles='Notifications' />
-                <HeaderOption avatar={true} titles='Me' onClick={logoutOfApp} title='log out' />
+                <HeaderOption avatar={true} titles='Log Out' onClick={logoutOfApp} title='log out' />
             </div>
-
         </div>
     )
 }

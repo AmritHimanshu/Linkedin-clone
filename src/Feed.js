@@ -59,7 +59,6 @@ function Feed() {
                     </form>
                 </div>
                 <div className="feed__inputOptions">
-                    {/* <InputOption value={photo} Icon={ImageIcon} title='Photos' color='#7085F9' onChange={e => setPhoto(e.target.value)} onClick={<PostPicInput photo={photo} setPhoto={setPhoto} />} /> */}
 
                     <InputOption value={photo} Icon={ImageIcon} title='Photos' color='#7085F9' onChange={e => setPhoto(e.target.value)} onClick={<PostPicInput photo={photo} setPhoto={setPhoto} />} />
                     <InputOption Icon={SubscriptionsIcon} title='Videos' color='#E7A33E' />

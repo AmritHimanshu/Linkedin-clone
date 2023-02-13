@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import firebase from 'firebase/compat/app';
-import { auth, db } from './firebase';
+import { auth, db, storage } from './firebase';
+import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
+import { v4 } from 'uuid';
 import { login } from './features/userSlice';
-import './Login.css'
+import './Login.css';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [profilePic, setProfilePic] = useState('');
-    const [picFile, setPicFile] = useState();
+    const [imageUpload, setImageUpload] = useState(null);
 
     const history = useNavigate();
     const dispatch = useDispatch();
 
-    const handleChange = (e) => {
-        // console.log(e.target.files);
-        setPicFile(URL.createObjectURL(e.target.files[0]));
-    }
+    // const handleChange = (e) => {
+    //     // console.log(e.target.files);
+    //     setImageUpload(URL.createObjectURL(e.target.files[0]));
+    // }
 
     useEffect(() => {
         history('/');
@@ -35,13 +37,14 @@ function Login() {
                     uid: userAuth.user.uid,
                     displayName: userAuth.user.displayName,
                     profileUrl: userAuth.user.photoURL,
-                    // photo: userAuth.user.photo,
                 })
                 );
             }).catch(error => alert(error));
     };
 
-    const register = () => {
+
+    const register = async () => {
+    
         if (!name) {
             return alert("Please enter your name");
         }
@@ -51,12 +54,21 @@ function Login() {
         if (!password) {
             return alert("Please enter your password");
         }
+
+        if (imageUpload == null) return;
+        const imageRef = ref(storage, `${email}/${imageUpload.name + v4()}`);
+
+        
+        // Uploading file to firebase
+        uploadBytes(imageRef, imageUpload).then(() => {
+            // alert("Image uploaded");
+        });
+
         auth.createUserWithEmailAndPassword(email, password)
             .then((userAuth) => {
                 userAuth.user.updateProfile({
                     displayName: name,
                     photoURL: profilePic,
-                    // photo: picFile,
                 }).then(() => {
                     dispatch(
                         login({
@@ -64,7 +76,6 @@ function Login() {
                             uid: userAuth.user.uid,
                             displayName: name,
                             photoURL: profilePic,
-                            // photo: picFile,
                         })
                     );
                 });
@@ -74,10 +85,11 @@ function Login() {
             email: email,
             displayName: name,
             photoURL: profilePic,
-            // photo: picFile,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
+
     };
+
 
     return (
         <div className='login'>
@@ -87,11 +99,9 @@ function Login() {
             <form>
                 <input value={name} onChange={e => setName(e.target.value)} placeholder='Full Name (required if registering)' type="text" />
 
-                <input value={profilePic} onChange={e => setProfilePic(e.target.value)} placeholder='Profile pic URL (optional) or select file' type="text" />
+                <input value='' onChange={e => setProfilePic(e.target.value)} placeholder='Select file for Profile pic' type="text" />
 
-                {/* <input value={picFile} onChange={e => setProfilePic(e.target.value)} placeholder='Profile pic URL (optional) or select file' type="text" /> */}
-
-                {/* <input type="file" onChange={handleChange} /> */}
+                <input type="file" onChange={e => setImageUpload(e.target.files[0])} />
 
                 <input value={email} onChange={e => setEmail(e.target.value)} placeholder='Email' type="email" />
 
