@@ -25,7 +25,7 @@ function Sidebar() {
         <div className='sidebar'>
             <div className="sidebar__top">
                 <img src="https://images.unsplash.com/photo-1557682260-96773eb01377?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1129&q=80" alt="" />
-                <Avatar src={profilePhoto?.profileUrl} className='sidebar__avatar' >{user.displayName[0]}</Avatar>
+                <Avatar src={profilePhoto.profileUrl == '' ? user?.profileUrl : profilePhoto?.profileUrl} className='sidebar__avatar' >{user.displayName[0]}</Avatar>
                 <h2>{user.displayName}</h2>
                 <h4>{user.email}</h4>
             </div>
