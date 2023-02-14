@@ -55,14 +55,14 @@ function Login() {
             return alert("Please enter your password");
         }
 
-        if (imageUpload == null) return;
-        const imageRef = ref(storage, `${email}/${imageUpload.name + v4()}`);
-
-        
         // Uploading file to firebase
-        uploadBytes(imageRef, imageUpload).then(() => {
-            // alert("Image uploaded");
-        });
+        if (imageUpload != null) {
+            const imageRef = ref(storage, `${email}/${imageUpload.name + v4()}`);
+
+            uploadBytes(imageRef, imageUpload).then(() => {
+                // alert("Image uploaded");
+            });
+        }
 
         auth.createUserWithEmailAndPassword(email, password)
             .then((userAuth) => {
@@ -99,9 +99,9 @@ function Login() {
             <form>
                 <input value={name} onChange={e => setName(e.target.value)} placeholder='Full Name (required if registering)' type="text" />
 
-                <input value='' onChange={e => setProfilePic(e.target.value)} placeholder='Select file for Profile pic' type="text" />
+                <div className="input">Select Profile Pic :</div>
 
-                <input type="file" onChange={e => setImageUpload(e.target.files[0])} />
+                <input type="file" id='profileFile' onChange={e => setImageUpload(e.target.files[0])} />
 
                 <input value={email} onChange={e => setEmail(e.target.value)} placeholder='Email' type="email" />
 
