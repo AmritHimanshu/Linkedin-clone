@@ -4,6 +4,7 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import './MyNetworkBodyOption.css'
 
 function MyNetworkBodyOption({ profilePic, name, description, college }) {
+
     return (
         <div className='myNetworkBodyOption'>
             <div className="myNetworkBodyOption__image">

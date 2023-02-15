@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import firebase from 'firebase/compat/app';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, selectUser } from './features/userSlice';
 import { auth, db, storage } from './firebase';
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
-import { login } from './features/userSlice';
 import './Login.css';
 
 function Login() {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -18,16 +18,13 @@ function Login() {
     const history = useNavigate();
     const dispatch = useDispatch();
 
-    // const handleChange = (e) => {
-    //     // console.log(e.target.files);
-    //     setImageUpload(URL.createObjectURL(e.target.files[0]));
-    // }
-
     useEffect(() => {
         history('/');
     }, [])
 
 
+//----------- On clicking on Sign In button --------------
+// -------------------------------------------------------
     const loginToApp = (e) => {
         e.preventDefault();
         auth.signInWithEmailAndPassword(email, password)
@@ -42,7 +39,8 @@ function Login() {
             }).catch(error => alert(error));
     };
 
-
+//------------ On clicking on Register Now button ----------
+// ---------------------------------------------------------
     const register = async () => {
     
         if (!name) {
@@ -57,6 +55,7 @@ function Login() {
 
         // Uploading file to firebase
         if (imageUpload != null) {
+
             const imageRef = ref(storage, `${email}/${imageUpload.name + v4()}`);
 
             uploadBytes(imageRef, imageUpload).then(() => {
@@ -78,15 +77,16 @@ function Login() {
                             photoURL: profilePic,
                         })
                     );
+
                 });
             }).catch(error => alert(error));
 
-        db.collection('users').add({
-            email: email,
-            displayName: name,
-            photoURL: profilePic,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        })
+        // db.collection('users').add({
+        //     email: email,
+        //     displayName: name,
+        //     photoURL: profilePic,
+        //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        // })
 
     };
 

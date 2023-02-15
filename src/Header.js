@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { auth, storage } from './firebase';
-import { getAuth, updateProfile } from "firebase/auth";
+import firebase from 'firebase/compat/app';
+import { auth, db, storage } from './firebase';
 import { getDownloadURL, listAll, ref } from 'firebase/storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, selectUser } from './features/userSlice';
@@ -22,27 +22,31 @@ function Header() {
 
     const user = useSelector(selectUser);
 
+//--------------- Geting Images from the firebase storage --------------
+// ---------------------------------------------------------------------
     const [imageList, setImageList] = useState('');
-
     const imageListRef = ref(storage, `${user.email}/`);
-
     useEffect(() => {
-        listAll(imageListRef).then((res) => {
-            res.items.forEach((item) => {
-                getDownloadURL(item).then((url) => {
-                    setImageList(url);
+        if (!user.profileUrl) {
+            listAll(imageListRef).then((res) => {
+                res.items.forEach((item) => {
+                    getDownloadURL(item).then((url) => {
+                        setImageList(url);
+                    })
                 })
-            })
-        });
+            });
+        }
     }, []);
 
-    dispatch(setPic({profileUrl: imageList}));
+    dispatch(setPic({ profileUrl: imageList }));
 
-
+// ------------ Navigating to page /job --------------
     const jobs = () => {
         history('/jobs');
     }
 
+//---------- Log Out on clicking on Log out button ------------
+// ---------------------------------------------------------- 
     const logoutOfApp = () => {
         dispatch(logout())
         history('/');
@@ -62,7 +66,7 @@ function Header() {
 
             <div className="header__right">
                 <HeaderOption Icon={HomeIcon} titles='Home' onClick={() => { history('/') }} />
-                <HeaderOption Icon={SupervisorAccountIcon} titles='My Network' onClick={() => history('/mynetwork')} />
+                <HeaderOption Icon={SupervisorAccountIcon} titles='My Network' onClick={() => { history('/mynetwork') }} />
                 <HeaderOption Icon={BusinessCenterIcon} titles='Jobs' onClick={jobs} />
                 <HeaderOption Icon={ChatIcon} titles='Messaging' />
                 <HeaderOption Icon={NotificationsIcon} titles='Notifications' />

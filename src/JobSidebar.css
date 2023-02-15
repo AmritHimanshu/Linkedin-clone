@@ -2,8 +2,7 @@
   position: sticky;
   top: 100px;
   flex: 0.2;
-  /* flex: 0.3; */
-  max-height: 38vh;
+  max-height: 360px;
   margin-left: 20px;
   border-radius: 10px;
   text-align: center;

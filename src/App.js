@@ -23,7 +23,6 @@ function App() {
   useEffect(() => {
     if (window.innerWidth <= 800)
       setShowMobileWarning(true)
-    // console.log(showMobileWarning);
     else setShowMobileWarning(false)
   }, [])
 
@@ -52,7 +51,8 @@ function App() {
   }, []);
 
 
-  // Loading Spinner
+  //------------------- Loading Spinner ------------------
+  // -----------------------------------------------------
   const [users, loading] = useAuthState(auth);
   if (loading) {
     return (

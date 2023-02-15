@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { db } from './firebase'
+import { auth, db } from './firebase'
 import { useSelector } from 'react-redux';
 import { selectUser } from './features/userSlice';
 import firebase from 'firebase/compat/app';
@@ -41,7 +41,7 @@ function Feed() {
             name: user.displayName,
             description: 'This is a test',
             message: input,
-            photoUrl: user.profileUrl || "",
+            photoUrl: auth.currentUser.photoURL || "",
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         })
 

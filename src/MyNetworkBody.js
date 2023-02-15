@@ -1,5 +1,4 @@
 import React from 'react'
-import firebase from 'firebase/compat/app';
 import { db, database, auth } from './firebase'
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import { useSelector } from 'react-redux';

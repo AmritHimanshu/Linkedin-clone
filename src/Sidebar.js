@@ -1,18 +1,14 @@
 import React from 'react'
-import { Avatar } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectUser } from './features/userSlice';
-import { selectProfilePhoto } from './features/profilePhoto';
-import SearchIcon from '@mui/icons-material/Search';
+import { auth } from './firebase';
+import { Avatar } from '@mui/material'
 import './Sidebar.css'
 
 function Sidebar() {
 
     const user = useSelector(selectUser);
-    const profilePhoto = useSelector(selectProfilePhoto);
 
-
-    // var recent = ["reactjs", "programming", "development", "software design", "gaming"];
     const recentItem = (topic) => (
         <div className="sidebar__recentItem">
             <span className="sidebar__hash">#</span>
@@ -20,12 +16,11 @@ function Sidebar() {
         </div>
     )
 
-
     return (
         <div className='sidebar'>
             <div className="sidebar__top">
                 <img src="https://images.unsplash.com/photo-1557682260-96773eb01377?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1129&q=80" alt="" />
-                <Avatar src={profilePhoto.profileUrl == '' ? user?.profileUrl : profilePhoto?.profileUrl} className='sidebar__avatar' >{user.displayName[0]}</Avatar>
+                <Avatar src={auth.currentUser.photoURL} className='sidebar__avatar' >{user.displayName[0]}</Avatar>
                 <h2>{user.displayName}</h2>
                 <h4>{user.email}</h4>
             </div>
@@ -43,9 +38,6 @@ function Sidebar() {
 
             <div className="sidebar__bottom">
                 <p>Recent</p>
-                {/* {recent?.map(rec => (
-                    <div>{rec}</div>
-                ))} */}
                 {recentItem("reactjs")}
                 {recentItem("software design")}
                 {recentItem("programming")}
