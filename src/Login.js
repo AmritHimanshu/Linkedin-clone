@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { login, selectUser } from './features/userSlice';
+import { useDispatch } from 'react-redux';
+import { login } from './features/userSlice';
+import firebase from 'firebase/compat/app';
 import { auth, db, storage } from './firebase';
-import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
 import './Login.css';
 
@@ -81,12 +82,12 @@ function Login() {
                 });
             }).catch(error => alert(error));
 
-        // db.collection('users').add({
-        //     email: email,
-        //     displayName: name,
-        //     photoURL: profilePic,
-        //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        // })
+        db.collection('users').add({
+            email: email,
+            displayName: name,
+            photoURL: profilePic,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        })
 
     };
 

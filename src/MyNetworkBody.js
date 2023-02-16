@@ -1,6 +1,6 @@
 import React from 'react'
-import { db, database, auth } from './firebase'
-import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
+import { db } from './firebase'
+import { useCollection } from 'react-firebase-hooks/firestore';
 import { useSelector } from 'react-redux';
 import { selectUser } from './features/userSlice';
 import MyNetworkBodyOption from './MyNetworkBodyOption'
@@ -31,7 +31,7 @@ function MyNetworkBody() {
                     const { email, displayName, photoURL } = doc.data();
                     if (user.email != email)
                         return (
-                            <MyNetworkBodyOption key={doc.id} id={doc.id} profilePic={photoURL} name={displayName} description="" college="Student at Bhagalpur College of Engineering" />
+                            <MyNetworkBodyOption key={doc.id} id={doc.id} email={email} name={displayName} description="New to Linkedin and also this is for the test" college="Developed by HKA" />
                         )
                 })}
 
