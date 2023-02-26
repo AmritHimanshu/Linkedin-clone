@@ -17,16 +17,6 @@ function App() {
 
   const dispatch = useDispatch();
 
-  // Warning for mobile phone
-  const [showMobileWarning, setShowMobileWarning] = useState(false)
-
-  useEffect(() => {
-    if (window.innerWidth <= 800)
-      setShowMobileWarning(true)
-    else setShowMobileWarning(false)
-  }, [])
-
-
   // User
   const user = useSelector(selectUser);
 
