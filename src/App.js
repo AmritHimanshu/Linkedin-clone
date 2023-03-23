@@ -26,10 +26,10 @@ function App() {
         // user is logged in
         dispatch(
           login({
-            email: userAuth.user.email,
-            uid: userAuth.user.uid,
-            displayName: userAuth.user.displayName,
-            photoURL: userAuth.user.photoURL
+            email: userAuth.email,
+            uid: userAuth.uid,
+            displayName: userAuth.displayName,
+            photoURL: userAuth.photoURL
           })
         );
       }
